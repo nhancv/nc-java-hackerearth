@@ -3,5 +3,6 @@
  */
 
 fun main(args: Array<String>) {
+    println("Line: ${readLine()}")
     println("Hello, World!")
 }
