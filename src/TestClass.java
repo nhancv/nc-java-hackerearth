@@ -5,13 +5,13 @@ public class TestClass {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        String s = scanner.next();
-        int[] digits = new int[10];
-        for (int i = 0; i < s.length(); i++) {
-            digits[s.charAt(i) - 48]++;
+        int n = scanner.nextInt();
+        int[] digits = new int[n];
+        for (int i = 0; i < n; i++) {
+            digits[i] = scanner.nextInt();
         }
-        for (int i = 0; i < digits.length; i++) {
-            System.out.println(i + " " + digits[i]);
+        for (int i = n - 1; i > -1; i--) {
+            System.out.println(digits[i]);
         }
 
     }
