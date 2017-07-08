@@ -3,13 +3,11 @@
  */
 
 fun main(args: Array<String>) {
-    val n: Int = readLine()!!.toInt()
-    val inputArr = Array(n, { i: Int -> i })
-    for (i in 0..n - 1) {
-        inputArr[i] = readLine()!!.toInt()
+    val t: Int = readLine()!!.toInt()
+    for (i in 1..t) {
+        val n: Int = readLine()!!.toInt()
+        val s: String = java.lang.Integer.toBinaryString(n)
+        println(s.replace("0", "").length)
     }
-
-    for (item in inputArr.reversedArray())
-        println(item)
 
 }
