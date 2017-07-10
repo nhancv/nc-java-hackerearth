@@ -3,84 +3,61 @@
  */
 
 fun isAttacked(x: Int, y: Int, board: Array<Array<Int>>, n: Int): Boolean {
-    for (i in 0..n - 1) {
-        if (board[x][i] == 1) {
-            println("x $i $x $n attacked ")
-            return true
-        }
-    }
-    for (i in 0..n - 1) {
-        if (board[i][y] == 1) {
-            println("y $i $y $n attacked ")
-            return true
-        }
+    for (i in 0..board.size - 1) {
+        if (board[x][i] == 1) return true
     }
 
-    for (i in 0..n - 1 - y) {
-        if (board[i][y + i] == 1) return true
+    for (i in 0..board.size - 1) {
+        if (board[i][y] == 1) return true
     }
-    for (i in 0..y) {
-        if (board[i][y - i] == 1) return true
+
+    for (i in maxOf(x, y) downTo 0) {
+        if (x - i >= 0 && y - i >= 0 && board[x - i][y - i] == 1) return true
+        if (x - i >= 0 && y + i < board.size && board[x - i][y + i] == 1) return true
+        if (x + i < board.size && y + i < board.size && board[x + i][y + i] == 1) return true
+        if (x + i < board.size && y - i >= 0 && board[x + i][y - i] == 1) return true
     }
+
+    for (i in 0..board.size - 1 - minOf(x, y)) {
+        if (x - i >= 0 && y - i >= 0 && board[x - i][y - i] == 1) return true
+        if (x - i >= 0 && y + i < board.size && board[x - i][y + i] == 1) return true
+        if (x + i < board.size && y + i < board.size && board[x + i][y + i] == 1) return true
+        if (x + i < board.size && y - i >= 0 && board[x + i][y - i] == 1) return true
+    }
+
     return false
 
 }
 
 fun queen(board: Array<Array<Int>>, n: Int): Boolean {
-    if (n < 0) return true
+    if (n == 0) return true
 
-    for (i in 0..n - 1) {
-        for (j in 0..n - 1) {
-            if (isAttacked(i, j, board, n)) {
-                println("$i $j attacked $n")
-                continue
-            } else {
-                println("$i $j continue $n")
-
-                board[i][j] = 1
-                if (queen(board, n - 1)) {
-                    println("$i $j queen ${n - 1}")
-                    return true
-                }
-
-                board[i][j] = 0
-                println("$i $j reset $n")
-
-                for (r in 0..n - 1) {
-                    for (c in 0..n - 1) {
-                        print("${board[r][c]} ")
-                    }
-                    println()
-                }
-            }
+    for (i in 0..board.size - 1) {
+        for (j in 0..board.size - 1) {
+            if (isAttacked(i, j, board, n)) continue
+            board[i][j] = 1
+            if (queen(board, n - 1)) return true
+            board[i][j] = 0
         }
     }
     return false
 }
 
 fun main(args: Array<String>) {
-//    val n: Int = readLine()!!.toInt()
-//
-//    val arr = Array(n, { Array(n, { 0 }) })
-//
-//    println(queen(arr, n))
-//
-//    for (i in 0..n - 1) {
-//        val s: StringBuilder = StringBuilder()
-//        for (j in 0..n - 1) {
-//            s.append("${arr[i][j]} ")
-//        }
-//        println(s)
-//    }
+    val n: Int = readLine()!!.toInt()
 
-    val (l, r, k) = readLine()!!.split(' ')
-    var count: Int = 0
-    for (i in l.toInt()..r.toInt()) {
-        if (i % k.toInt() == 0) {
-            count++
+    val arr = Array(n, { Array(n, { 0 }) })
+
+    if (queen(arr, n)) {
+        println("YES")
+        for (i in 0..n - 1) {
+            val s: StringBuilder = StringBuilder()
+            for (j in 0..n - 1) {
+                s.append("${arr[i][j]} ")
+            }
+            println(s)
         }
-    }
-    println(count)
+    } else println("NO")
 
 
 }
