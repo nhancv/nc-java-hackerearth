@@ -20,10 +20,10 @@ fun main(args: Array<String>) {
 //        inputArr[i] = readLine()!!.toInt()
 //    }
 
-    val arr = Array(11, { Array(11, { i: Int -> i }) })
+    val arr = Array(11, { Array(11, { 0 }) })
     for (i in 0..arr.size - 1) {
         for (j in 0..arr[i].size - 1) {
-            arr[i][j] = (i + j)
+//            arr[i][j] = (i + j)
         }
     }
     queen(arr)
