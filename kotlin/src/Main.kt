@@ -2,7 +2,7 @@
  * Created by nhancao on 7/7/17.
  */
 
-fun isAttacked(x: Int, y: Int, board: Array<Array<Int>>, n: Int): Boolean {
+fun isAttacked(x: Int, y: Int, board: Array<Array<Int>>): Boolean {
     for (i in 0..board.size - 1) {
         if (board[x][i] == 1) return true
     }
@@ -34,7 +34,7 @@ fun queen(board: Array<Array<Int>>, n: Int): Boolean {
 
     for (i in 0..board.size - 1) {
         for (j in 0..board.size - 1) {
-            if (isAttacked(i, j, board, n)) continue
+            if (isAttacked(i, j, board)) continue
             board[i][j] = 1
             if (queen(board, n - 1)) return true
             board[i][j] = 0
