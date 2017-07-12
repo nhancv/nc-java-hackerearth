@@ -3,23 +3,26 @@
  */
 
 fun main(args: Array<String>) {
-    val (n, m) = readLine()!!.split(" ")
+    val q = readLine()!!.toInt()
+    val arr = arrayListOf<Int>()
 
-    val arr = Array(n.toInt(), { Array(m.toInt(), { 0 }) })
+    for (i in 0..q - 1) {
+        val input = readLine()!!.split(" ")
+        val n = input[0]
+        if (n.toInt() == 1) {
+            if (arr.size == 0) println("No Food")
+            else {
+                val res = arr[arr.size - 1]
+                arr.removeAt(arr.size - 1)
+                println(res)
+            }
 
-    for (i in 0..n.toInt() - 1) {
-        val tmp = readLine()!!.split(" ")
-        for (j in 0..m.toInt() - 1) {
-            arr[i][j] = tmp[j].toInt()
+        } else {
+            val m = input[1]
+            arr.add(m.toInt())
         }
+
     }
 
-    for (i in 0..m.toInt() - 1) {
-        var s = ""
-        for (j in 0..n.toInt() - 1) {
-            s += (arr[j][i].toString() + " ")
-        }
-        println(s)
-    }
 
 }
